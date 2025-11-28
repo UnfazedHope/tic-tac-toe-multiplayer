@@ -46,7 +46,7 @@ tictactoe-nakama/
 │   ├── package.json
 │   └── tsconfig.json
 └── client/
-    └── (React app will go here)
+    └── (React app lives here)
 
 ---
 

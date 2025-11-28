@@ -33,6 +33,7 @@ npm start
 ```
 
 Project Structure Setup
+
 Create the following directory structure:
 
 tictactoe-nakama/

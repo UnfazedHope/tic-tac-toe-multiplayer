@@ -37,63 +37,67 @@ const App: React.FC = () => {
   };
 
   // Fireworks effect
-const launchFireworks = () => {
-  const duration = 3000;
-  const animationEnd = Date.now() + duration;
-  
-  const randomInRange = (min: number, max: number) => Math.random() * (max - min) + min;
-
-  const interval = setInterval(() => {
-    const timeLeft = animationEnd - Date.now();
-
-    if (timeLeft <= 0) {
-      clearInterval(interval);
-      return;
-    }
-
-    const particleCount = 50;
+  const launchFireworks = () => {
+    const duration = 3000;
+    const animationEnd = Date.now() + duration;
     
-    confetti({
-      startVelocity: 30,
-      spread: 360,
-      ticks: 60,
-      zIndex: 9999,
-      particleCount,
-      origin: {
-        x: randomInRange(0.1, 0.3),
-        y: Math.random() - 0.2
-      }
-    });
-    
-    confetti({
-      startVelocity: 30,
-      spread: 360,
-      ticks: 60,
-      zIndex: 9999,
-      particleCount,
-      origin: {
-        x: randomInRange(0.7, 0.9),
-        y: Math.random() - 0.2
-      }
-    });
-  }, 250);
-};
+    const randomInRange = (min: number, max: number) => Math.random() * (max - min) + min;
 
-// Sad confetti for losing
-const sadConfetti = () => {
-  confetti({
-    particleCount: 100,
-    spread: 70,
-    origin: { y: 0.6 },
-    colors: ['#808080', '#404040', '#606060'],
-    gravity: 2,
-    scalar: 0.8
-  });
-};
+    const interval = setInterval(() => {
+      const timeLeft = animationEnd - Date.now();
+
+      if (timeLeft <= 0) {
+        clearInterval(interval);
+        return;
+      }
+
+      const particleCount = 50;
+      
+      confetti({
+        startVelocity: 30,
+        spread: 360,
+        ticks: 60,
+        zIndex: 9999,
+        particleCount,
+        origin: {
+          x: randomInRange(0.1, 0.3),
+          y: Math.random() - 0.2
+        }
+      });
+      
+      confetti({
+        startVelocity: 30,
+        spread: 360,
+        ticks: 60,
+        zIndex: 9999,
+        particleCount,
+        origin: {
+          x: randomInRange(0.7, 0.9),
+          y: Math.random() - 0.2
+        }
+      });
+    }, 250);
+  };
+
+  // Sad confetti for losing
+  const sadConfetti = () => {
+    confetti({
+      particleCount: 100,
+      spread: 70,
+      origin: { y: 0.6 },
+      colors: ['#808080', '#404040', '#606060'],
+      gravity: 2,
+      scalar: 0.8
+    });
+  };
 
   // Initialize Nakama client
   useEffect(() => {
-    const nakamaClient = new Client('defaultkey', 'localhost', '7350', false);
+    const host = process.env.REACT_APP_NAKAMA_HOST || 'localhost';
+    const port = process.env.REACT_APP_NAKAMA_PORT || '7350';
+    const useSSL = process.env.REACT_APP_NAKAMA_SSL === 'true';
+    
+    const nakamaClient = new Client('defaultkey', host, port, useSSL);
     setClient(nakamaClient);
   }, []);
 

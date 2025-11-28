@@ -36,6 +36,7 @@ Project Structure Setup
 
 Create the following directory structure:
 
+<pre>
 tictactoe-nakama/
 ├── docker-compose.yml
 ├── server-data/
@@ -47,6 +48,7 @@ tictactoe-nakama/
 │   └── tsconfig.json
 └── client/
     └── (React app lives here)
+</pre>
 
 ---
 

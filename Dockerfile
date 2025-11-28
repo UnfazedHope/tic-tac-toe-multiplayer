@@ -7,12 +7,7 @@ COPY server-src /nakama/modules
 ENV NAKAMA_RUNTIME_PATH=/nakama/modules
 
 CMD sh -lc "\
-  echo 'Cleaning dev config files (if present)...'; \
-  rm -f /nakama/data/local.yml || true; \
-  rm -f /nakama/data/*.local.yml || true; \
-  rm -f /nakama/data/local.* || true; \
-  rm -f /nakama/data/*.dev.yml || true; \
-  echo 'Starting Nakama with DB=${DATABASE_URL}'; \
+  echo 'Starting Nakama with DB ${DATABASE_URL}'; \
   nakama migrate up --database.address=${DATABASE_URL} || true; \
   nakama --name nakama --database.address=${DATABASE_URL} --logger.level DEBUG --runtime.path ${NAKAMA_RUNTIME_PATH} \
 "

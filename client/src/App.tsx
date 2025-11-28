@@ -93,13 +93,15 @@ const App: React.FC = () => {
 
   // Initialize Nakama client
   useEffect(() => {
-    const host = process.env.REACT_APP_NAKAMA_HOST || 'localhost';
-    const port = process.env.REACT_APP_NAKAMA_PORT || '7350';
-    const useSSL = process.env.REACT_APP_NAKAMA_SSL === 'true';
-    
-    const nakamaClient = new Client('defaultkey', host, port, useSSL);
-    setClient(nakamaClient);
-  }, []);
+  const host = process.env.REACT_APP_NAKAMA_HOST || 'localhost';
+  const port = process.env.REACT_APP_NAKAMA_PORT || '7350';
+  const useSSL = process.env.REACT_APP_NAKAMA_SSL === 'true';
+  
+  console.log('Connecting to Nakama:', { host, port, useSSL });
+  
+  const nakamaClient = new Client('defaultkey', host, port, useSSL);
+  setClient(nakamaClient);
+}, []);
 
   // Connect and authenticate
   const connectToNakama = async () => {

@@ -116,7 +116,7 @@ const App: React.FC = () => {
       setSession(newSession);
       setMyUserId(newSession.user_id || '');
 
-      const newSocket = client.createSocket();
+      const newSocket = client.createSocket(true);
       await newSocket.connect(newSession, true);
       setSocket(newSocket);
 

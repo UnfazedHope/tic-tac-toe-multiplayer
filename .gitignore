@@ -1,9 +1,11 @@
 node_modules/
-client/node_modules/
 server-src/node_modules/
-server-data/node_modules/
-dist/
-build/
+client/node_modules/
+client/build/
+server-data/logs/
+*.log
 .env
-.vscode/
+.env.local
 .DS_Store
+npm-debug.log*
+.vscode/

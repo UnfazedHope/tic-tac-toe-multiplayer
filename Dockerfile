@@ -1,13 +1,14 @@
-FROM heroiclabs/nakama:3.7.0
+FROM heroiclabs/nakama:3.22.0
 
-# Copy Nakama configuration and JS modules
-COPY server-data /nakama/data
-COPY server-src /nakama/modules
+# Copy game modules and startup script
+COPY server-data/modules /nakama/data/modules
+COPY start-nakama.sh /nakama/start-nakama.sh
 
-ENV NAKAMA_RUNTIME_PATH=/nakama/modules
+# Make script executable
+RUN chmod +x /nakama/start-nakama.sh
 
-CMD sh -lc "\
-  echo 'Starting Nakama with DB ${DATABASE_URL}'; \
-  nakama migrate up --database.address=${DATABASE_URL} || true; \
-  nakama --name nakama --database.address=${DATABASE_URL} --logger.level DEBUG --runtime.path ${NAKAMA_RUNTIME_PATH} \
-"
+# Expose HTTP port (Render needs this)
+EXPOSE 7350
+
+# Use startup script
+CMD ["/nakama/start-nakama.sh"]
